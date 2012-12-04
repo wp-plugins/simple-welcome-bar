@@ -1,4 +1,4 @@
-=== Welcome Bar ===
+=== Simple Welcome Bar ===
 Contributors: robertlane
 Tags: theme, themes, link, links, ad, ads
 Requires at least: 3.3
@@ -7,11 +7,11 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Welcome Bar is a dropdown bar at the top of your site to draw attention to a link or message.
+Simple Welcome Bar is a dropdown bar at the top of your site to draw attention to a link or message.
 
 == Description ==
 
-Welcome Bar is a tool to expand on your theme and draw attention to your message. With this you can promote
+Simple Welcome Bar is a tool to expand on your theme and draw attention to your message. With this you can promote
 a new article, a new site, or just wish everyone 'Happy Holidays.' 
 
 You can also adjust the coloring to compliment your theme or make it really stand out. This is great if you
@@ -38,8 +38,8 @@ ex. change the default to 999999, 100000 or higher. This should fix this for mos
 
 == Screenshots ==
 
-1. The Welcome Bar settings page.
-2. The Welcome Bar displayed on the home page.
+1. The Simple Welcome Bar settings page.
+2. The Simple Welcome Bar displayed on the home page.
 
 == Changelog ==
 
