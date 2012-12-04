@@ -24,6 +24,7 @@ Currently this is setup to stay hidden for one week after the visitor closes the
 This section describes how to install the plugin and get it working.
 
 For manual installation:
+
 1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Open the settings for 'Welcome Bar' and change to your needs.
@@ -48,7 +49,7 @@ ex. change the default to 999999, 100000 or higher. This should fix this for mos
 
 == Upgrade Notice ==
 
-== Arbitrary section ==
+== To Do List ==
 Here are some of the things I would like to do:
 
 * Clean up the CSS and improve the looks
