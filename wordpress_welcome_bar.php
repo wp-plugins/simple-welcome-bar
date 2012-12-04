@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Simple_Welcome_Bar
- * @version 1.0
+ * @version 1.1
  */
 /*
 Plugin Name: Simple Welcome Bar
 Plugin URI: http://wordpress.org/extend/plugins/simple-welcome-bar/
 Description: Dropdown Bar for first time visitors and special promotions.
 Author: Robert Lane
-Version: 1.0
+Version: 1.1
 Author URI: http://profiles.wordpress.org/robertlane
 */
 
@@ -44,7 +44,7 @@ public function modCSS() {
 	
 <style type='text/css'>
 
-#welcomebar {
+.welcomebar {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -57,53 +57,42 @@ public function modCSS() {
 	padding: 10px;
 	z-index: <?php echo $options["z_index"];?>;
 }
-#welcomebar p {
+.welcomebar p {
 	text-align: center;	
+	font-family: <?php echo $options["font_family"];?>;
 	color: <?php echo $options["font_color"];?>;
 }
 a.wb-cta  {
-	background: #ffe684; /* Old browsers */
-	background: -moz-linear-gradient(top,  #ffe684 0%, #ffcc00 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffe684), color-stop(100%,#ffcc00)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #ffe684 0%,#ffcc00 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #ffe684 0%,#ffcc00 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #ffe684 0%,#ffcc00 100%); /* IE10+ */
-	background: linear-gradient(top,  #ffe684 0%,#ffcc00 100%); /* W3C */
-	border: 1px solid #f0c620;
+	background: <?php echo $options["color_button_background"];?>;
+	border: 1px solid <?php echo $options["color_button_border"];?>;
 	border-radius: 3px;
 	-o-border-radius: 3px;
 	-ms-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
-	padding: 10px 20px;
+	padding: 4px 14px;
 	font-family: Impact, "Arial Black", sans-serif;
 	font-size: .9em;	
 	text-transform: uppercase;
 	font-weight: 100;
 	letter-spacing: 1px;
-	color: #815e0b;
+	color: <?php echo $options["color_button_text"];?>;
 	text-decoration: none;
-	text-shadow: 0px 1px 0px #f3c422;
-	-o-text-shadow: 0px 1px 0px #f3c422;
-	-ms-text-shadow: 0px 1px 0px #f3c422;
-	-moz-text-shadow: 0px 1px 0px #f3c422;
-	-webkit-text-shadow: 0px 1px 0px #f3c422;
-	box-shadow: 0px 1px 0px #e2e3e4;
-	-o-box-shadow: 0px 1px 0px #e2e3e4;
-	-ms-box-shadow: 0px 1px 0px #e2e3e4;
-	-moz-box-shadow: 0px 1px 0px #e2e3e4;
-	-webkit-box-shadow: 0px 1px 0px #e2e3e4;
+	text-shadow: 0px 1px 0px rgba(0,0,0,.1);
+	-o-text-shadow: 0px 1px 0px rgba(0,0,0,.1);
+	-ms-text-shadow: 0px 1px 0px rgba(0,0,0,.1);
+	-moz-text-shadow: 0px 1px 0px rgba(0,0,0,.1);
+	-webkit-text-shadow: 0px 1px 0px rgba(0,0,0,.1);
+	box-shadow: 0px 1px 0px rgba(0, 0, 0, .08);
+	-o-box-shadow: 0px 1px 0px rgba(0, 0, 0, .08);
+	-ms-box-shadow: 0px 1px 0px rgba(0, 0, 0, .08);
+	-moz-box-shadow: 0px 1px 0px rgba(0, 0, 0, .08);
+	-webkit-box-shadow: 0px 1px 0px rgba(0, 0, 0, .08);
 	margin-left: 5px;
 }
 a.wb-cta:hover {
-	background: #8dc63f; /* Old browsers */
-	background: -moz-linear-gradient(top,  #8dc63f 0%, #75b443 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8dc63f), color-stop(100%,#75b443)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #8dc63f 0%,#75b443 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #8dc63f 0%,#75b443 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #8dc63f 0%,#75b443 100%); /* IE10+ */
-	background: linear-gradient(top,  #8dc63f 0%,#75b443 100%); /* W3C */
-	border: 1px solid #75b443;
+	background: <?php echo $options["color_button_background_hover"];?>; 
+	border: 1px solid <?php echo $options["color_button_border_hover"];?>;
 	border-radius: 3px;
 	-o-border-radius: 3px;
 	-ms-border-radius: 3px;
@@ -114,13 +103,8 @@ a.wb-cta:hover {
 	text-transform: uppercase;
 	font-weight: 100;
 	letter-spacing: 1px;
-	color: #fff;
+	color: <?php echo $options["color_button_text_hover"];?>;
 	text-decoration: none;
-	text-shadow: 0px 1px 0px #70b039;
-	-o-text-shadow: 0px 1px 0px #70b039;
-	-ms-text-shadow: 0px 1px 0px #70b039;
-	-moz-text-shadow: 0px 1px 0px #70b039;
-	-webkit-text-shadow: 0px 1px 0px #70b039;
 }
 a.anchor-relative {
 	position: relative;
@@ -138,30 +122,28 @@ a.anchor-relative {
 }
 */
 
-.wb-close {
-	font: Impact , "Arial", sans-serif;
+a.wb-close {
+	font-family: Helvetica , "Arial", sans-serif;
 	font-size: .7em;
-	width: 15px;
-	height: 15px;
 	
-	background: #aeaeae; /* Old browsers */
-	background: -moz-linear-gradient(top,  #aeaeae 0%, #959595 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aeaeae), color-stop(100%,#959595)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #aeaeae 0%,#959595 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #aeaeae 0%,#959595 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #aeaeae 0%,#959595 100%); /* IE10+ */
-	background: linear-gradient(top,  #aeaeae 0%,#959595 100%); /* W3C */
+	box-sizing: border-box;
+	width: 17px;
+	height: 18px;
 	
-	border: 1px solid black;
-	border-radius:15px;
-	color: black;
-	padding: 5px;
+	background: rgba(0, 0, 0, .10);
+	
+	border: 1px solid rgba(0, 0, 0, .15);
+	border-radius:4px;
+	color: rgba(0, 0, 0, .30);
 	position: fixed;
 	top:10;
 	right:5px;
+	
+	
 }
-.wb-close:hover {
-	color:#555;
+a.wb-close:hover {
+	color:rgba(0,0,0,.6);
+	text-decoration: none;
 }
 
 .wb-spacer {
@@ -183,7 +165,7 @@ public function html_layout() {
 	}
     
     // Backslashes are for javascript compatability
-    $layout = '<div id="welcomebar">\
+    $layout = '<div id="welcomebar" class="welcomebar">\
 		<p>'.$options['message'].'\
 		'.$showButton.'\
 		<a href="#" title="Close this." class="wb-close" id="wb-close">X</a>\
@@ -244,26 +226,26 @@ function admin_form() {
 				</tr>
 			</table>
 			
-			<h3>Display Options</h3>
-			<p>These settings modify the appearance.</p>
+			<h3>Welcome Bar Settings</h3>
+			<p>These settings modify the appearance of the Welcome Bar.</p>
 			    
 			<table class="form-table">
        			<tr>
-					<th scope="row">Font Color</th>
+					<th scope="row">Text Color</th>
 					<td>
 						<input type="text" size="15" id="font_color" name="welcomebar[font_color]" value="<?php echo $admin_options['font_color']; ?>" />
 						<br /><div id="font_colorpicker"></div></div>
-						<br /><span style="color:#666666;margin-left:2px;">Color of your message font. Key word not accepted (orange, red, etc.)</span>
+						<br /><span style="color:#666666;margin-left:2px;">Color of your message font. Keyword not accepted (orange, red, etc.)</span>
 						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is #5b5a59</em></span>
 					</td>
 				</tr>
 
         		<tr>
-					<th scope="row">Background Color</th>
+					<th scope="row">Bar Background Color</th>
 					<td>
 						<input type="text" size="15" id="bg_color" name="welcomebar[bg_color]" value="<?php echo $admin_options['bg_color']; ?>" />
 						<br /><div id="bg_colorpicker"></div>
-						<br /><span style="color:#666666;margin-left:2px;">Color of your message font. Key word not accepted (orange, red, etc.)</span>
+						<br /><span style="color:#666666;margin-left:2px;">Color of your message font. Keyword not accepted (orange, red, etc.)</span>
 						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is #ededed</em></span>
 					</td>
 				</tr>
@@ -287,9 +269,74 @@ function admin_form() {
 					</td>
 				</tr>
 			</table>
+			
+			<h3>Button Settings</h3>
+			<p>These settings modify the appearance of the button on rest and on hover.</p>
+			    
+			<table class="form-table">
+       			<tr>
+					<th scope="row">Button Background Color</th>
+					<td>
+						<input type="text" size="15" id="color_button_background" name="welcomebar[color_button_background]" value="<?php echo $admin_options['color_button_background']; ?>" />
+						<br /><div id="button_background_colorpicker"></div></div>
+						<br /><span style="color:#666666;margin-left:2px;">Color of the button. Keyword not accepted (orange, red, etc.)</span>
+						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is #FC0</em></span>
+					</td>
+				</tr>
+
+        		<tr>
+					<th scope="row">Button Border Color</th>
+					<td>
+						<input type="text" size="15" id="color_button_border" name="welcomebar[color_button_border]" value="<?php echo $admin_options['color_button_border']; ?>" />
+						<br /><div id="button_border_colorpicker"></div>
+						<br /><span style="color:#666666;margin-left:2px;">The color of the border. Keyword not accepted (orange, red, etc.)</span>
+						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is #D9AD00</em></span>
+					</td>
+				</tr>
+				
+        		<tr>
+					<th scope="row">Button Text Color</th>
+					<td>
+						<input type="text" size="15" id="color_button_text" name="welcomebar[color_button_text]" value="<?php echo $admin_options['color_button_text']; ?>" />
+						<br /><div id="button_text_colorpicker"></div>
+						<br /><span style="color:#666666;margin-left:2px;">The color of the text. Keyword not accepted (orange, red, etc.)</span>
+						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is #916706</em></span>
+					</td>
+				</tr>
+				
+       			<tr>
+					<th scope="row">Button Background Color on Hover</th>
+					<td>
+						<input type="text" size="15" id="color_button_background_hover" name="welcomebar[color_button_background_hover]" value="<?php echo $admin_options['color_button_background_hover']; ?>" />
+						<br /><div id="button_background_hover_colorpicker"></div></div>
+						<br /><span style="color:#666666;margin-left:2px;">Color of the button on hover. Keyword not accepted (orange, red, etc.)</span>
+						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is #8DC63F</em></span>
+					</td>
+				</tr>
+
+        		<tr>
+					<th scope="row">Button Border Color on Hover</th>
+					<td>
+						<input type="text" size="15" id="color_button_border_hover" name="welcomebar[color_button_border_hover]" value="<?php echo $admin_options['color_button_border_hover']; ?>" />
+						<br /><div id="button_border_hover_colorpicker"></div>
+						<br /><span style="color:#666666;margin-left:2px;">The color of the border on hover. Keyword not accepted (orange, red, etc.)</span>
+						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is #75B443</em></span>
+					</td>
+				</tr>
+				
+        		<tr>
+					<th scope="row">Button Text Color on Hover</th>
+					<td>
+						<input type="text" size="15" id="color_button_text_hover" name="welcomebar[color_button_text_hover]" value="<?php echo $admin_options['color_button_text_hover']; ?>" />
+						<br /><div id="button_text_hover_colorpicker"></div>
+						<br /><span style="color:#666666;margin-left:2px;">The color of the text on hover. Keyword not accepted (orange, red, etc.)</span>
+						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is #FFF</em></span>
+					</td>
+				</tr>				
+			</table>
 				
 			<h3>Advanced Options</h3>
-			<p>These settings modify the core of the plugin.</p>
+			<p>These settings modify other settings for the plugin.</p>
 
 			<table class="form-table">
 				<tr>
@@ -321,11 +368,63 @@ function admin_form() {
       jQuery('#bg_color').blur(function() {
         jQuery('#bg_colorpicker').slideUp('slow');
       });
+	  jQuery('#color_button_border').focus(function() {
+        jQuery('#button_border_colorpicker').slideDown('slow');
+      });
+      jQuery('#color_button_border').blur(function() {
+        jQuery('#button_border_colorpicker').slideUp('slow');
+      });
+	  jQuery('#color_button_border_hover').focus(function() {
+        jQuery('#button_border_hover_colorpicker').slideDown('slow');
+      });
+      jQuery('#color_button_border_hover').blur(function() {
+        jQuery('#button_border_hover_colorpicker').slideUp('slow');
+      });	  
+	  jQuery('#color_button_background').focus(function() {
+        jQuery('#button_background_colorpicker').slideDown('slow');
+      });
+      jQuery('#color_button_background').blur(function() {
+        jQuery('#button_background_colorpicker').slideUp('slow');
+      });	  
+	  jQuery('#color_button_background_hover').focus(function() {
+        jQuery('#button_background_hover_colorpicker').slideDown('slow');
+      });
+      jQuery('#color_button_background_hover').blur(function() {
+        jQuery('#button_background_hover_colorpicker').slideUp('slow');
+      });	  	  
+	  jQuery('#color_button_text').focus(function() {
+        jQuery('#button_text_colorpicker').slideDown('slow');
+      });
+      jQuery('#color_button_text').blur(function() {
+        jQuery('#button_text_colorpicker').slideUp('slow');
+      });	  	  
+	  jQuery('#color_button_text_hover').focus(function() {
+        jQuery('#button_text_hover_colorpicker').slideDown('slow');
+      });
+      jQuery('#color_button_text_hover').blur(function() {
+        jQuery('#button_text_hover_colorpicker').slideUp('slow');
+      });	  	  
       jQuery(document).ready(function() {
         jQuery('#font_colorpicker').farbtastic('#font_color');
-        jQuery('#bg_colorpicker').farbtastic('#bg_color');
+		jQuery('#bg_colorpicker').farbtastic('#bg_color');
+		
+		
+        jQuery('#button_background_colorpicker').farbtastic('#color_button_background');
+		jQuery('#button_background_hover_colorpicker').farbtastic('#color_button_background_hover');
+		jQuery('#button_border_colorpicker').farbtastic('#color_button_border');
+		jQuery('#button_border_hover_colorpicker').farbtastic('#color_button_border_hover');
+		jQuery('#button_text_colorpicker').farbtastic('#color_button_text');
+		jQuery('#button_text_hover_colorpicker').farbtastic('#color_button_text_hover');
+		
+		
         jQuery('#font_colorpicker').hide();
         jQuery('#bg_colorpicker').hide();
+		jQuery('#button_background_colorpicker').hide();
+		jQuery('#button_background_hover_colorpicker').hide();
+		jQuery('#button_border_colorpicker').hide();
+		jQuery('#button_border_hover_colorpicker').hide();
+		jQuery('#button_text_colorpicker').hide();
+		jQuery('#button_text_hover_colorpicker').hide();
       });
     </script>
 
@@ -343,6 +442,12 @@ static function add_defaults() {
         "bg_color" => "#ededed",
 	    "font_family" => "Georgia, Serif",
 		"z_index" => "10000",
+		"color_button_background" => "#ffcc00",
+		"color_button_border" => "#d9ad00",
+		"color_button_background_hover" => "#8dc63f",
+		"color_button_text" => "#916706",
+		"color_button_border_hover" => "#75b443",
+		"color_button_text_hover" => "#ffffff",
 );
     add_option( 'welcomebar' , $defaults, '', 'yes');
 }
