@@ -28,10 +28,16 @@ public function welcomebar() {
 }
 
 function js_scripts() {
-    wp_enqueue_script('hello-bar-cookie', plugin_dir_url(__file__).'js/wordpresswelcomebar.js', array('jquery'), null);
+	$options = get_option('welcomebar');
+	?>
+	<script>var swbCookieExpire = <?php echo $options['cookie_expire'];?></script>
+	<?php
+    wp_enqueue_script('welcome-bar-cookie', plugin_dir_url(__file__).'js/wordpresswelcomebar.js', array('jquery'), null);
 }
 
 public function admin_scripts() {
+	wp_enqueue_style('simple-welcome-bar-admin-ui-css', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/base/jquery-ui.css', false );
+	wp_enqueue_script('jquery-ui-tabs');
     wp_enqueue_style('farbtastic');
     wp_enqueue_script('farbtastic');
 }
@@ -49,7 +55,7 @@ public function modCSS() {
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 30px;
+	height: <?php echo $options["height"];?>;
 	background-color: <?php echo $options["bg_color"];?>;
 	border-bottom:4px solid #fff;
 	margin: 0;
@@ -112,16 +118,6 @@ a.anchor-relative {
 	height: 1.2em;
 }
 
-/*
-@-moz-document url-prefix() {
-    #hello-bar img {
-		position: absolute;
-		top: -15px;
-		left: 130px;		
-	}
-}
-*/
-
 a.wb-close {
 	font-family: Helvetica , "Arial", sans-serif;
 	font-size: .7em;
@@ -148,7 +144,7 @@ a.wb-close:hover {
 
 .wb-spacer {
 	top: 0;
-	height: 30px;
+	height: <?php echo $options["height"];?>;
 }
 </style>
 <?php
@@ -195,6 +191,14 @@ function admin_form() {
 			<?php settings_fields('welcomebar_options'); ?>
 			<?php $admin_options = get_option('welcomebar'); ?>
 
+			<div id="tabs">
+			<ul>
+        		<li><a href="#tabs-1">Main Options</a></li>
+        		<li><a href="#tabs-2">Main Bar Style</a></li>
+        		<li><a href="#tabs-3">Button Style</a></li>
+        		<li><a href="#tabs-4">Advanced Options</a>
+    		</ul>
+    		<div id="tabs-1">
 			<table class="form-table">
 				<!-- Text Area Control -->
 				<tr>
@@ -225,7 +229,9 @@ function admin_form() {
 					</td>
 				</tr>
 			</table>
+			</div>
 			
+			<div id="tabs-2">
 			<h3>Welcome Bar Settings</h3>
 			<p>These settings modify the appearance of the Welcome Bar.</p>
 			    
@@ -268,8 +274,20 @@ function admin_form() {
 						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is Georgia</em></span>
 					</td>
 				</tr>
+				
+				<tr>
+					<th scope="row">Bar Height</th>
+					<td>
+						<input type="text" size="64" name="welcomebar[height]" value="<?php echo $admin_options['height']; ?>" />
+						<br /><span style="color:#666666;margin-left:2px;">Set the height of the Bar.</span>
+						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is 30px</em></span>
+					</td>
+				</tr>
+				
 			</table>
+			</div>
 			
+			<div id="tabs-3">
 			<h3>Button Settings</h3>
 			<p>These settings modify the appearance of the button on rest and on hover.</p>
 			    
@@ -334,11 +352,21 @@ function admin_form() {
 					</td>
 				</tr>				
 			</table>
-				
+			</div>
+			
+			<div id="tabs-4">
 			<h3>Advanced Options</h3>
 			<p>These settings modify other settings for the plugin.</p>
 
 			<table class="form-table">
+				<tr>
+					<th scope="row">Cookie Expire</th>
+					<td>
+						<input type="text" size="64" name="welcomebar[cookie_expire]" value="<?php echo $admin_options['cookie_expire']; ?>" />
+						<br /><span style="color:#666666;margin-left:2px;">Change when the cookie will expire and the bar re-appears.</span>
+						<br /><span style="color:#666666;margin-left:2px;"><em>*The default is 604800000 (7 days in nano seconds)</em></span>
+					</td>
+				</tr>
 				<tr>
 					<th scope="row">Z-Index Fix</th>
 					<td>
@@ -349,6 +377,9 @@ function admin_form() {
 				</tr>
 				
 			</table>
+			</div>
+			
+			</div><!-- end of tabs -->
 			<p class="submit">
 			  <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
 			</p>
@@ -425,6 +456,8 @@ function admin_form() {
 		jQuery('#button_border_hover_colorpicker').hide();
 		jQuery('#button_text_colorpicker').hide();
 		jQuery('#button_text_hover_colorpicker').hide();
+
+		jQuery( '#tabs' ).tabs();
       });
     </script>
 
@@ -448,6 +481,8 @@ static function add_defaults() {
 		"color_button_text" => "#916706",
 		"color_button_border_hover" => "#75b443",
 		"color_button_text_hover" => "#ffffff",
+		"height" => "30px",
+		"cookie_expire" => "604800000",
 );
     add_option( 'welcomebar' , $defaults, '', 'yes');
 }
