@@ -1,22 +1,22 @@
 <?php
 /**
  * @package Simple_Welcome_Bar
- * @version 1.1
+ * @version 1.2
  */
 /*
 Plugin Name: Simple Welcome Bar
 Plugin URI: http://wordpress.org/extend/plugins/simple-welcome-bar/
 Description: Dropdown Bar for first time visitors and special promotions.
 Author: Robert Lane
-Version: 1.1
+Version: 1.2
 Author URI: http://profiles.wordpress.org/robertlane
 */
 
-class welcomebar {
+class simplewelcomebar {
 
 // --  Call the actions using class-function default function  --  //
 
-public function welcomebar() {
+public function simplewelcomebar() {
     add_action( 'wp_enqueue_scripts', array( $this, 'js_scripts' ) );
     add_action( 'admin_print_scripts-settings_page_welcomebar', array( $this, 'admin_scripts' ) );
     add_action( 'wp_head', array( $this, 'modCSS' ) );
@@ -32,7 +32,7 @@ function js_scripts() {
 	?>
 	<script>var swbCookieExpire = <?php echo $options['cookie_expire'];?></script>
 	<?php
-    wp_enqueue_script('welcome-bar-cookie', plugin_dir_url(__file__).'js/wordpresswelcomebar.js', array('jquery'), null);
+    wp_enqueue_script('welcome-bar-cookie', plugin_dir_url(__file__).'js/simplewelcomebar.js', array('jquery'), null);
 }
 
 public function admin_scripts() {
@@ -500,7 +500,7 @@ function welcomebar_plugin_action_links( $links, $file ) {
 
 	if ( $file == plugin_basename( __FILE__ ) ) {
 		$settings_link = '<a href="'.get_admin_url().'options-general.php?page=welcomebar">'.__('Settings').'</a>';
-		array_push( $links, $settings_link );
+		array_unshift( $links, $settings_link );
 	}
 
 	return $links;
@@ -511,6 +511,6 @@ function welcomebar_plugin_action_links( $links, $file ) {
 }
 
 // Create an instance of the class.
-$wp_welcomebar = new welcomebar;
+$swp_welcomebar = new simplewelcomebar;
 
 ?>

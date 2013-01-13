@@ -15,7 +15,7 @@ Simple Welcome Bar is a tool to expand on your theme and draw attention to your 
 a new article, a new site, or just wish everyone 'Happy Holidays.' 
 
 You can also adjust the coloring to compliment your theme or make it really stand out. This is great if you
-want to be subtle with a new artical or need to warn about an urgent matter.
+want to be subtle with a new article or need to warn about an urgent matter.
 
 Currently this is setup to stay hidden for one week after the visitor closes the bar.
 
@@ -44,14 +44,19 @@ ex. change the default to 999999, 100000 or higher. This should fix this for mos
 
 == Changelog ==
 
-= 1.0 =
-* Initial release
+= 1.2 =
+* Added support for custom cookie expiration.
+* Added tab navigation for options page.
+* Internal changes for broader compatibility.
 
 = 1.1 =
 * Fixed font-family bug.
 * Fixed close button styles.
 * Added color picking options for button background, border and text on rest and hover.
 * Cleaned up CSS.
+
+= 1.0 =
+* Initial release
 
 == Upgrade Notice ==
 
@@ -65,4 +70,4 @@ Here are some of the things I would like to do:
 * Add the ability to modify the plugin with the new Theme Customizer
 * Add international support (translations)
 
-If there are any suggestions or wish to help with development, please shoot me an email at support@robertlane.info.
+If there are any suggestions or wish to help with development, please shoot me an email at robert@robertlane.info.
