@@ -69,5 +69,8 @@ Here are some of the things I would like to do:
 * Clean up the CSS and improve the looks
 * Add the ability to modify the plugin with the new Theme Customizer
 * Add international support (translations)
+* Add support for multiline HTML
+* Custom CSS overide panel
+* Documentation in options panel
 
 If there are any suggestions or wish to help with development, please shoot me an email at robert@robertlane.info.
