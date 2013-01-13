@@ -12,11 +12,11 @@ Version: 1.1
 Author URI: http://profiles.wordpress.org/robertlane
 */
 
-class welcomebar {
+class simplewelcomebar {
 
 // --  Call the actions using class-function default function  --  //
 
-public function welcomebar() {
+public function simplewelcomebar() {
     add_action( 'wp_enqueue_scripts', array( $this, 'js_scripts' ) );
     add_action( 'admin_print_scripts-settings_page_welcomebar', array( $this, 'admin_scripts' ) );
     add_action( 'wp_head', array( $this, 'modCSS' ) );
@@ -28,7 +28,7 @@ public function welcomebar() {
 }
 
 function js_scripts() {
-    wp_enqueue_script('hello-bar-cookie', plugin_dir_url(__file__).'js/wordpresswelcomebar.js', array('jquery'), null);
+    wp_enqueue_script('welcome-bar-cookie', plugin_dir_url(__file__).'js/simplewelcomebar.js', array('jquery'), null);
 }
 
 public function admin_scripts() {
@@ -111,16 +111,6 @@ a.anchor-relative {
 	width: 1.2em;
 	height: 1.2em;
 }
-
-/*
-@-moz-document url-prefix() {
-    #hello-bar img {
-		position: absolute;
-		top: -15px;
-		left: 130px;		
-	}
-}
-*/
 
 a.wb-close {
 	font-family: Helvetica , "Arial", sans-serif;
@@ -476,6 +466,6 @@ function welcomebar_plugin_action_links( $links, $file ) {
 }
 
 // Create an instance of the class.
-$wp_welcomebar = new welcomebar;
+$swp_welcomebar = new simplewelcomebar;
 
 ?>
